@@ -1,4 +1,8 @@
+altgraph==0.17.4
+packaging==23.2
 patool==2.0.0
+pyinstaller==6.2.0
+pyinstaller-hooks-contrib==2023.10
+python-utils==3.3.3
 PyYAML==6.0
 watchdog==3.0.0
-python-utils==3.3.3
