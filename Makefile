@@ -45,8 +45,8 @@ install:
 	fi
 	cp init/systemd/$(APP_NAME).service /etc/systemd/system/$(APP_NAME).service
 	systemctl enable $(APP_NAME).service
-	systemctl start $(APP_NAME).service
 	@echo "$(APP_NAME) installed successfully to $(INSTALL_DIR)"
+	@echo "Start it with `systemctl start $(APP_NAME).service`"
 
 # Uninstall command
 uninstall:
