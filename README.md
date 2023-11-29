@@ -29,7 +29,7 @@
 2. **Create and Activate a Virtual Environment (Optional):**
     ```bash
     python -m venv venv
-    source venv/bin/activat
+    source venv/bin/activate
     ```
 
 3. **Install Python Dependencies:**
