@@ -5,6 +5,8 @@ APP_NAME=extractarr
 INSTALL_DIR=/usr/local/bin
 DIST_DIR=dist
 BUILD_DIR=build
+CONFIG_DIR=$(HOME)/.config/extractarr
+CONFIG_FILE=$(CONFIG_DIR)/config.yml
 
 # Python command to use
 PYTHON=python3
@@ -35,6 +37,12 @@ install:
 	mkdir -p $(INSTALL_DIR)
 	cp $(DIST_DIR)/$(APP_NAME) $(INSTALL_DIR)/$(APP_NAME)
 	chmod +x $(INSTALL_DIR)/$(APP_NAME)
+	mkdir -p $(CONFIG_DIR)
+	if [ ! -f "$(CONFIG_FILE)" ]; then \
+		echo "Creating default config.yml..."; \
+	        echo "# Configuration settings for extractarr" > $(CONFIG_FILE); \
+	        echo "# Add your configurations here" >> $(CONFIG_FILE); \
+	fi
 	cp init/sytemd/$(APP_NAME).service /etc/systemd/system/$(APP_NAME).service
 	systemctl enable $(APP_NAME).service
 	systemctl start $(APP_NAME).service
