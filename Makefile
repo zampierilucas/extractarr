@@ -34,19 +34,20 @@ clean:
 # Install command
 install:
 	@echo "Installing $(APP_NAME)..."
+	@systemctl stop $(APP_NAME).service > /dev/null 2>&1 || true
 	mkdir -p $(INSTALL_DIR)
 	cp $(DIST_DIR)/$(APP_NAME) $(INSTALL_DIR)/$(APP_NAME)
 	chmod +x $(INSTALL_DIR)/$(APP_NAME)
 	mkdir -p $(CONFIG_DIR)
-	if [ ! -f "$(CONFIG_FILE)" ]; then \
-		echo "Creating default config.yml..."; \
-	        echo "# Configuration settings for extractarr" > $(CONFIG_FILE); \
-	        echo "# Add your configurations here" >> $(CONFIG_FILE); \
+	@if [ ! -f "$(CONFIG_FILE)" ]; then \
+	    echo "Creating default config.yml..."; \
+	    echo "# Configuration settings for extractarr" > $(CONFIG_FILE); \
+	    echo "# Add your configurations here" >> $(CONFIG_FILE); \
 	fi
 	cp init/systemd/$(APP_NAME).service /etc/systemd/system/$(APP_NAME).service
 	systemctl enable $(APP_NAME).service
 	@echo "$(APP_NAME) installed successfully to $(INSTALL_DIR)"
-	@echo "Start it with `systemctl start $(APP_NAME).service`"
+	@echo "Start it with 'systemctl start $(APP_NAME).service'"
 
 # Uninstall command
 uninstall:
