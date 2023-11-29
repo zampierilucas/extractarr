@@ -1,0 +1,4 @@
+patool==2.0.0
+PyYAML==6.0
+watchdog==3.0.0
+python-utils==3.3.3
