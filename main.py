@@ -17,6 +17,7 @@ def main():
     # Extract relevant settings
     watch_directories = config.get('watch_directories', [])
     check_interval = config.get('check_interval', 5)
+    exclude_extensions = config.get('exclude_extensions', [])
 
     if not watch_directories:
         print("No directories are configured for watching. Please update the config.yml file.")
@@ -30,7 +31,7 @@ def main():
     # Initialize and start the watcher for each directory
     for directory in watch_directories:
         print(f"Starting to watch: {directory}")
-        watcher = Watcher(directory, check_interval)
+        watcher = Watcher(directory, check_interval, exclude_extensions)
         watcher.run()
 
 if __name__ == '__main__':

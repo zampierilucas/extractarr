@@ -63,8 +63,22 @@ sudo systemctl restart extractarr.service
 
 ## Configuration
 
-Edit the `.config/extractarr/config.yml` file to specify directories to monitor and other settings.
-Uninstallation
+Edit the `.config/extractarr/config.yml`, the settings that can be used are:
+- `watch_directories`: A list of directories that extractarr will monitor for new archive files.
+- `exclude_extensions`: A list of file extensions to exclude from processing. Files with these extensions will be ignored by extractarr.
+- `check_interval`: Time interval in seconds between each check for new files in the monitored directories.
+
+```yaml
+check_interval: 5 # Time in seconds
+watch_directories:
+  - /path/to/first/directory
+  - /path/to/second/directory
+
+exclude_extensions:
+  - .iso
+  - .exe
+  - .example_extension
+```
 
 ## To uninstall:
 ```bash
