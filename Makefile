@@ -43,7 +43,7 @@ install:
 	        echo "# Configuration settings for extractarr" > $(CONFIG_FILE); \
 	        echo "# Add your configurations here" >> $(CONFIG_FILE); \
 	fi
-	cp init/sytemd/$(APP_NAME).service /etc/systemd/system/$(APP_NAME).service
+	cp init/systemd/$(APP_NAME).service /etc/systemd/system/$(APP_NAME).service
 	systemctl enable $(APP_NAME).service
 	systemctl start $(APP_NAME).service
 	@echo "$(APP_NAME) installed successfully to $(INSTALL_DIR)"
