@@ -2,7 +2,7 @@ import os
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from patoolib import extract_archive
+from patoolib import extract_archive, test_archive
 from src.utils import log_message
 import threading
 
@@ -27,6 +27,14 @@ class Handler(FileSystemEventHandler):
                 log_message('INFO', f"File ignored as it uses an excluded extension: {file_name}")
                 return None
 
+        try:
+            test_archive(file_path,verbosity=-1)
+            log_message('INFO', f"Format supported: {os.path.splitext(file_path)[1]}")
+        except Exception as e:
+            log_message('ERROR', f"File is not a valid archive or supported format: {file_path}.")
+            log_message('DEBUG', f"Error: {e}")
+            return None
+
         log_message('INFO', f"Processing file: {file_name}")
 
         # Start a new thread to check if the file is complete
@@ -38,7 +46,7 @@ class Handler(FileSystemEventHandler):
         try:
             extract_path = os.path.splitext(file_path)[0]
             os.makedirs(extract_path, exist_ok=True)
-            extract_archive(file_path, outdir=extract_path, verbosity=-1,interactive=False)
+            extract_archive(file_path, outdir=extract_path, verbosity=-1, interactive=False)
             log_message('INFO', f"Extracted: {os.path.basename(file_path)}")
         except Exception as e:
             log_message('ERROR', f"Error processing {os.path.basename(file_path)}: {e}")

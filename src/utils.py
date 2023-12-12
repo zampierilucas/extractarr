@@ -31,5 +31,7 @@ def log_message(level, message):
         logging.warning(message)
     elif level == 'ERROR':
         logging.error(message)
+    elif level == 'DEBUG':
+        logging.error(message)
     else:
         logging.info(message)  # Default to INFO if level is unspecified
