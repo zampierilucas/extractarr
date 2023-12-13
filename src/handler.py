@@ -16,7 +16,6 @@ class Handler(FileSystemEventHandler):
 
         elif event.event_type == 'created':
             file_name = os.path.basename(event.src_path)
-            log_message('INFO', f"New file detected: {file_name}")
             Handler.handle_file(self, event.src_path)
 
     @staticmethod
@@ -31,7 +30,7 @@ class Handler(FileSystemEventHandler):
             test_archive(file_path,verbosity=-1)
             log_message('INFO', f"Format supported: {os.path.splitext(file_path)[1]}")
         except Exception as e:
-            log_message('ERROR', f"File is not a valid archive or supported format: {file_path}.")
+            log_message('DEBUG', f"File is not a valid archive or supported format: {file_path}.")
             log_message('DEBUG', f"Error: {e}")
             return None
 
